@@ -11,5 +11,10 @@ Rails.application.routes.draw do
     registrations: 'end_users/registrations'
   }
 
-
+  namespace :admin do
+    resources :items
+  end
+  namespace :public do
+    resource :end_users
+  end
 end

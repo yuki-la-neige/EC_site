@@ -22,7 +22,7 @@ class Admins::SessionsController < Devise::SessionsController
 
   # The path used after sign in.
   def after_sign_in_path_for(resource)
-    super(resource)
+    admin_items_path
   end
   protected
 
