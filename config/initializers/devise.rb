@@ -164,7 +164,7 @@ Devise.setup do |config|
   # secure: true in order to force SSL only cookies.
   # config.rememberable_options = {}
 
-  # ==> Configuration for :validatable
+  # ==> Configuration for :validatablefile:///C:/Program%20Files/WindowsApps/91750D7E.Slack_4.3.4.0_x64__8she8kybcnzg4/app/resources/app.asar/dist/notifications.html#
   # Range for password length.
   config.password_length = 6..128
 
@@ -254,7 +254,7 @@ Devise.setup do |config|
   # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
