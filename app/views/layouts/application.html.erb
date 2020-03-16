@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header class="navbar sticky-top" style="border-bottom: solid;">
+    <header class="navbar" style="border-bottom: solid;">
       <h1 class="card nav-brand">LOGO</h1>
 
       <div class="navbar-left">
@@ -19,7 +19,7 @@
           <%= link_to "商品登録", "#" %>
           <%= link_to "ログアウト", destroy_admin_session_path %>
         <% elsif end_user_signed_in? %>
-          <%= link_to "マイページ", "#" %>
+          <%= link_to "マイページ", public_end_user_path %>
           <%= link_to "カート一覧", "#" %>
           <%= link_to "ログアウト", destroy_end_user_session_path %>
         <% else %>

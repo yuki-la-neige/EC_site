@@ -22,7 +22,7 @@ class EndUsers::SessionsController < Devise::SessionsController
 
   # The path used after sign in.
   def after_sign_in_path_for(resource)
-    public_end_users_path
+    public_end_user_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.

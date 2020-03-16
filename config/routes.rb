@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :items
   end
   namespace :public do
-    resource :end_users
+    resource :end_user
+    get "public/end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
   end
 end
