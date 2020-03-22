@@ -39,7 +39,6 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :postal_code
       t.string :address
-      t.boolean :withdrawal_flag
 
       t.timestamps null: false
     end

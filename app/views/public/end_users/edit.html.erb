@@ -2,7 +2,7 @@
 <%= link_to "退会する", public_end_user_withdrawal_path, class: "btn btn-danger" %>
 </h3>
 
-<%= form_for(@user, url: public_end_user_path) do |f| %>
+<%= form_with model: @user, url: public_end_user_path do |f| %>
   <table class="table table-bordered">
     <colgroup class="bg-light" style="border-right: double;"></colgroup>
     <colgroup></colgroup>
