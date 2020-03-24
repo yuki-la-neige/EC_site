@@ -1,0 +1,26 @@
+<h3>商品　新規登録画面</h3>
+<%= form_with(model: @item, local: true) do |f| %>
+  <div class="container-fluid row align-items-center ">
+    <div class="col-5">
+      <%= attachment_image_tag @item, :image, :fill, 100, 100, fallback: "no_image.jpg" %><br>
+      <%= f.attachment_field :image, class: "btn btn-outline-info" %>
+    </div>
+
+    <div class="col-5">
+      <%= f.label :商品名 %>
+      <%= f.text_field :name %><br>
+      <%= f.label :商品説明 %>
+      <%= f.text_area :discription %><br>
+      <%= f.label :ジャンル %>
+      <%= f.select :genre, [@genre] %><br>
+      <%= f.label :税抜価格 %>
+      <%= f.text_field :price %>円<br>
+      <%= f.label :販売ステータス %>
+      <%= f.radio_button :status, :true %>販売中
+      <%= f.radio_button :status, :false %>売切れ
+    </div>
+    <div class="col-2 align-self-end">
+      <%= f.submit "新規登録", class: "btn btn-info" %>
+    </div>
+  </div>
+<% end %>
