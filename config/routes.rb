@@ -11,11 +11,14 @@ Rails.application.routes.draw do
     registrations: 'end_users/registrations'
   }
 
+  root to: "public/items#index", as: :items
+
   namespace :admin do
     resources :items
     resources :end_users
   end
   namespace :public do
+    resources :items, only: [:show]
     resource :end_user
     get "public/end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
   end
