@@ -66,6 +66,8 @@ gem "devise"
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 
+gem "font-awesome-sass"
+
 gem "paranoia"
 
 gem "refile", require: "refile/rails", github: "manfe/refile"
