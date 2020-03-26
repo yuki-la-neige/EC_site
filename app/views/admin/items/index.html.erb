@@ -1,10 +1,12 @@
-<h3>商品一覧画面</h3>
-<div class="container-fluid row align-items-center">
-  <%= link_to new_admin_item_path do %>
-    <i class="fas fa-plus-circle"></i>
-  <% end %>
+<div class="container-fluid">
+  <div class="row">
+    <h3 class="col-10">商品一覧画面</h3>
+    <%= link_to new_admin_item_path do %>
+      <i class="fas fa-plus-circle fa-3x col-2"></i>
+    <% end %>
+  </div>
 
-  <table class="table col-lg">
+  <table class="table">
     <thead>
       <tr>
         <th>商品ID</th>
@@ -17,10 +19,16 @@
     <tbody>
       <% @items.each do |item| %>
         <tr>
-          <td><% item.id %></td>
-          <td><% item.name %></td>
-          <td><% item.genre.name %></td>
-          <td><% item.status %></td>
+          <td><%= item.id %></td>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td><%= item.genre.name %></td>
+          <td><% if item.status == true %>
+                販売中
+              <% else %>
+                売切れ
+              <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

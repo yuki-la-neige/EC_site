@@ -14,12 +14,13 @@ Rails.application.routes.draw do
   root to: "public/items#index", as: :items
 
   namespace :admin do
+    resources :genres, only: [:index, :create, :edit, :update]
     resources :items
-    resources :end_users
+    resources :end_users, only: [:index, :show, :edit, :update, :destroy]
   end
   namespace :public do
     resources :items, only: [:show]
-    resource :end_user
+    resource :end_user, only: [:show, :edit, :update]
     get "public/end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
   end
 end
