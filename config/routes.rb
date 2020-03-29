@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :items, only: [:show]
     resource :end_user, only: [:show, :edit, :update]
-    get "public/end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
+    get "end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
     root "items#index", as: :root
 end
 end
