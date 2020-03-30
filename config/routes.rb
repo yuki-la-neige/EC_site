@@ -13,14 +13,16 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :genres, except: [:new, :update, :destroy]
     resources :items
-    resources :end_users, only: [:index, :show, :edit, :update, :destroy]
+    resources :end_users, except: [:new, :create]
   end
   namespace :public do
     resources :items, only: [:show]
     resource :end_user, only: [:show, :edit, :update]
     get "end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
     root "items#index", as: :root
+    resources :cart_items, except: [:new, :edit]
+    delete "/cart_items" => "cart_items#destroy_all", as: :destroy_cart_items
 end
 end
