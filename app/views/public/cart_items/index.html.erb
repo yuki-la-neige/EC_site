@@ -1,8 +1,10 @@
-<div class="container">
-  <h3>ショッピングカート</h3>
-  <%= link_to "カートを空にする", "#" %>
-  <table class="table">
-    <thead>
+<div class="row">
+  <h3 class="col-auto mr-auto">ショッピングカート</h3>
+  <%= link_to "カートを空にする", destroy_cart_items_public_end_user_path, method: :delete, class: "btn btn-danger col-auto" %>
+</div>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead class="thead-light">
       <tr>
         <th>商品名</th>
         <th>単価（税込）</th>
@@ -12,26 +14,41 @@
       </tr>
     </thead>
     <tbody>
-      <% @items.each do |item| %>
+      <% if @cart.errors.any? %>
+        <div class="alert alert-warning">
+          <ul>
+            <% @cart.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% sum = 0 %>
+      <% @carts.each do |cart| %>
         <tr>
-          <td><%= item.name %></td>
-          <td><%= (item.price * 1.08).round %></td>
-          <td><%= form_with(model: @cart, :url => {:action => :create}, local: true) do |f| %>
-                <%= f.number_field :quantity %>
-                <%= f.submit "変更" %>
+          <td><%= cart.item.name %></td>
+          <td><%= (cart.item.price * 1.08).round %></td>
+          <td><%= form_with(model: [@user, cart], url: public_end_user_cart_item_path(cart.id), local: true) do |f| %>
+                <%= f.number_field :quantity, :min => 1 %>
+                <%= f.submit "変更", class: "btn btn-primary" %>
               <% end %>
           </td>
-          <td><%= (item.price * 1.08).round * @carts.quantity  %></td>
-          <td><%= link_to "削除する", public_root_path %></td>
+          <td><%= total = (cart.item.price * 1.08).round * cart.quantity %></td>
+          <td><%= link_to "削除する", public_end_user_cart_item_path(cart.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></td>
         </tr>
+        <% sum += total %>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "買い物を続ける", public_root_path %>
-  <table>
-    <tr>
-      <th>合計金額</th>
-      <td><%= Item.all.sum(:price) %></td>
-    </tr>
-  </table>
+  <div class="row">
+    <%= link_to "買い物を続ける", public_root_path, class: "btn btn-primary col-md-3" %>
+    <table class="table table-bordered col-md-3 offset-md-9">
+      <tr>
+        <th class="table-active">合計金額</th>
+        <td><%= sum %></td>
+      </tr>
+    </table>
+  </div>
+  <%= link_to "情報入力に進む", "#", class: "btn btn-primary btn-block" %>
 </div>

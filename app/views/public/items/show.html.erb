@@ -13,11 +13,18 @@
       <%= attachment_image_tag @item, :image, size: "100x200", fallback: "no_image.jpg", class: "card-img-top" %>
     </div>
     <div class="col-6">
+      <% if @cart.errors.any? %>
+        <%= @cart.errors.count %>errors prohibited this obj from being saved:<br/>
+        <%= @cart.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      <% end %>
       <h4 class="card-titile"><%= @item.name %></h4>
       <p class="card-text"><%= @item.description %></p>
       <h5 class="card-text">￥<%= @item.price %></h5>
-      <%= form_with(model: @cart, url: "cart_items#create", local: true) do |f| %>
-        <%= f.number_field :quantity %>
+      <%= form_with(model: [@user, @cart], :url => {:action=>"create", :controller=>"public/cart_items"}, local: true) do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.number_field :quantity, :min=>1 %>
         <%= f.submit "カートに入れる" %>
       <% end %>
     </div>
