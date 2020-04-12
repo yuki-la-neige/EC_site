@@ -15,15 +15,13 @@
     </thead>
     <tbody>
       <% if @cart.errors.any? %>
-        <div class="alert alert-warning">
-          <ul>
-            <% @cart.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+        <div class="alert-danger">
+          <h5><%= @cart.errors.count %>件のエラーがあります</h5>
+          <% @cart.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
         </div>
       <% end %>
-
       <% sum = 0 %>
       <% @carts.each do |cart| %>
         <tr>
