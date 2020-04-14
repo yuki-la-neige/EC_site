@@ -9,7 +9,8 @@ class Public::CartItemsController < ApplicationController
     @cart = current_end_user.cart_items.new(cart_item_params)
     cart_item = current_end_user.cart_items.find_by(item_id: cart_item_params[:item_id])
     if cart_item
-      cart_item.update(cart_item_params)
+      cart_item.quantity += @cart.quantity
+      cart_item.save
       flash[:notice] = "Quantity was successfully updated"
       redirect_to public_end_user_cart_items_path
     else
