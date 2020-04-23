@@ -6,5 +6,7 @@ class EndUser < ApplicationRecord
   acts_as_paranoid
 
   has_many :cart_items, dependent: :destroy
+  has_many :addresses
+  has_many :orders
 
 end
