@@ -32,5 +32,5 @@ Rails.application.routes.draw do
     get "orders/new_confirmation" => "orders#new_confirmation"
     get "orders/completion" => "orders#completion"
     resources :addresses, except: [:new, :show]
-]  end
+  end
 end
