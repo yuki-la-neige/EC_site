@@ -7,16 +7,18 @@
     <th>小計</th>
   </thead>
   <tbody>
-    <% .each do |order| %>
+    <% sum = 0 %>
+    <% @items.each do |item| %>
       <tr>
-        <td><%= .name %></td>
-        <td><%= .price %></td>
-        <td><%= .quantity %></td>
-        <td><%= . * .quantity %></td>
+        <td><%= attachment_image_tag item.item, :image, size: "50x50", fallback: "no_image.jpg" %><%= item.item.name %></td>
+        <td><%= item.item.price %></td>
+        <td><%= item.quantity %></td>
+        <td><%= total = item.item.price * item.quantity %></td>
       </tr>
+      <%= sum += total %>
     <% end %>
   </tbody>
-</table>
+</table><br>
 
 <table class="table">
   <tbody>
@@ -26,16 +28,19 @@
     </tr>
     <tr>
       <th>商品合計</th>
-      <td><%= @cart_item.price * @cart_item.quantity %></td>
+      <td><%= sum %></td>
     </tr>
     <tr>
       <th>請求金額</th>
-      <td><%= @cart_item.prive * @cart_item.quantity %> + 800</td>
+      <td><%= sum + 800 %></td>
     </tr>
   </tbody>
 </table>
 
-<h4>支払方法</h4><%= .payment_method %>
-<h4>お届け先</h4><%= .delivary_pastal_code + .delivary_address %><br><%= .delivary_name %>
+<h4>支払方法</h4>
+  <%= session[:order]["payment_method"] %>
+<h4>お届け先</h4>
+  <%= "〒#{session[:order]["delivery_postal_code"]}  #{session[:order]["delivery_address"]}" %><br>
+  <%= session[:order]["delivery_name"] %><br>
 
-<%= "購入を確定する" %>
+<%= link_to "購入を確定する", public_orders_completion_path %>
