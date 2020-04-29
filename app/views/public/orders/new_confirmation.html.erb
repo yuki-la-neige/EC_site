@@ -1,46 +1,54 @@
-<h4>注文情報確認</h4>
-<table class="table">
-  <thead>
-    <th>商品名</th>
-    <th>単価（税込）</th>
-    <th>数量</th>
-    <th>小計</th>
-  </thead>
-  <tbody>
-    <% sum = 0 %>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= attachment_image_tag item.item, :image, size: "50x50", fallback: "no_image.jpg" %><%= item.item.name %></td>
-        <td><%= price = (item.item.price * 1.08).round %></td>
-        <td><%= item.quantity %></td>
-        <td><%= total = price * item.quantity %></td>
-      </tr>
-      <%= sum += total %>
-    <% end %>
-  </tbody>
-</table><br>
+<div class="container-fluid offset-1">
+  <h4 class="my-3">注文情報確認</h4>
+  <div class="row">
+    <table class="col-7 table">
+      <thead>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+      </thead>
+      <tbody>
+        <% sum = 0 %>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= attachment_image_tag item.item, :image, size: "50x50", fallback: "no_image.jpg" %><%= item.item.name %></td>
+            <td><%= price = (item.item.price * 1.08).round %></td>
+            <td><%= item.quantity %></td>
+            <td><%= total = price * item.quantity %></td>
+          </tr>
+          <% sum += total %>
+        <% end %>
+      </tbody>
+    </table>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <th>送料</th>
-      <td>800</td>
-    </tr>
-    <tr>
-      <th>商品合計</th>
-      <td><%= sum %></td>
-    </tr>
-    <tr>
-      <th>請求金額</th>
-      <td><%= sum + 800 %></td>
-    </tr>
-  </tbody>
-</table>
+    <table class="offset-1 col-3 table">
+      <tbody>
+        <tr>
+          <th>送料</th>
+          <td>800</td>
+        </tr>
+        <tr>
+          <th>商品合計</th>
+          <td><%= sum %></td>
+        </tr>
+        <tr>
+          <th>請求金額</th>
+          <td><%= sum + 800 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<h4>支払方法</h4>
-  <%= session[:order]["payment_method"] %>
-<h4>お届け先</h4>
-  <%= "〒#{session[:order]["delivery_postal_code"]}  #{session[:order]["delivery_address"]}" %><br>
-  <%= session[:order]["delivery_name"] %><br>
+  <h4 class="font-weight-bold">支払方法</h4>
+    <div class="ml-3">
+      <%= session[:order]["payment_method"] %>
+    </div>
+  <h4 class="font-weight-bold">お届け先</h4>
+    <div class="ml-3">
+      <%= "〒#{session[:order]["delivery_postal_code"]}  #{session[:order]["delivery_address"]}" %><br>
+      <%= session[:order]["delivery_name"] %>
+    </div>
 
-<%= link_to "購入を確定する", public_orders_completion_path %>
+  <%= link_to "購入を確定する", public_orders_completion_path, class: "mx-auto btn btn-primary", style: "display: block;" %>
+</div>

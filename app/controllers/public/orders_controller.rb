@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :cart_items_presence
   def new
     @order = Order.new
     @user = current_end_user
@@ -56,7 +57,11 @@ class Public::OrdersController < ApplicationController
       sum += (item.price * 1.08).round * f.quantity
     end
     session[:order][:payment_amount] = sum
-    redirect_to  public_order_new_confirmation_path
+    if session[:order][:delivery_postal_code].presence && session[:order][:delivery_address].presence && session[:order][:delivery_name].presence
+      redirect_to  public_order_new_confirmation_path
+    else
+      redirect_to new_public_order_path
+    end
   end
   def index
   end
@@ -66,5 +71,10 @@ class Public::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:end_user_id, :payment_method, :postage, :payment_amount, :status, :delivery_postal_code, :delivery_address, :delivery_name)
+  end
+  def cart_items_presence
+    unless current_end_user.cart_items.presence
+      redirect_to public_root_path
+    end
   end
 end

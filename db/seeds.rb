@@ -31,14 +31,3 @@ EndUser.create!(
   email: "a@a",
   password: "aaaaaa"
 )
-CartItem.create!(
-  item_id: "1",
-  end_user_id: "1",
-  amount: "3"
-)
-Address.create!(
-  postal_code: "2222222",
-  address: "東京都新宿区西新宿",
-  name: "新宿二郎",
-  end_user_id: "1"
-)

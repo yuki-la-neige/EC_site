@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items
-  belongs_to :end_user
+  belongs_to :end_user, -> {with_deleted}
 
   enum status:{
     waiting:      0, #入金待ち
@@ -10,7 +10,7 @@ class Order < ApplicationRecord
     done:         5  #発送済み
   }
   enum payment_method:{
-    card:         0, #クレジットカード
-    bamk:         1  #
+    "クレジットカード":         0, #クレジットカード
+    "銀行振込":         1  #
   }
 end

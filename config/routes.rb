@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     root "items#index", as: :root
     resources :items, only: [:show]
     get "end_user/withdrawal" => "end_users#withdrawal", as: :end_user_withdrawal
-    resource :end_user, only: [:show, :edit, :update] do
+    resource :end_user, only: [:show, :edit, :update, :destroy] do
       resources :cart_items, except: [:new, :edit, :show]
       delete "/cart_items" => "cart_items#destroy_all", as: :destroy_cart_items
     end
