@@ -19,3 +19,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $("button").text("Hello JQuery on Rails");
+})

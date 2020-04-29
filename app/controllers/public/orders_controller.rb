@@ -16,7 +16,7 @@ class Public::OrdersController < ApplicationController
       order_item.order_id = order.id
       order_item.item_id = cart.item.id
       order_item.quantity = cart.quantity
-      order_item.price_at = cart.item.price
+      order_item.price_at = (cart.item.price * 1.08).round
       order_item.status = 0
       order_item.save
      end
@@ -53,7 +53,7 @@ class Public::OrdersController < ApplicationController
     sum = 0
     cart_items.each do |f|
       item = f.item
-      sum += item.price * f.quantity
+      sum += (item.price * 1.08).round * f.quantity
     end
     session[:order][:payment_amount] = sum
     redirect_to  public_order_new_confirmation_path
