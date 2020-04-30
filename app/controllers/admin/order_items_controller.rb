@@ -19,7 +19,6 @@ class Admin::OrderItemsController < ApplicationController
         puts "-----------------------------------"
       end
     end
-
-    redirect_to admin_orders_path
+    redirect_to admin_order_path(order_item.order.id)
   end
 end
