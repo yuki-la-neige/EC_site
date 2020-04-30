@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :end_users, except: [:new, :create]
     patch "end_users/:id" => "end_users#withdrawal"
     resources :orders, only: [:index, :show, :update]
+    resources :order_items, only: [:update]
   end
   namespace :public do
     root "items#index", as: :root

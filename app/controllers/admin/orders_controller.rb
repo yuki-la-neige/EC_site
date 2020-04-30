@@ -10,19 +10,12 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.status = params[:status]
-    @order.order_items.each do |item|
-      item.status = params[:item_status]
-      if item.status == "producing"
-        @order.status = "producing"
-      elsif @order.status == "confirmation"
-        item.status = "waiting"
-      end
-      item.save
-    end
-    unless @order.order_items.where.not(status: "done").presence
-        @order.status = "preparation"
-    end
     @order.save
+    if @order.status == "confirmation"
+      @order.order_items.each do |order_item|
+        order_item.update(status: "waiting")
+      end
+    end
     redirect_to admin_order_path(@order)
   end
 end
