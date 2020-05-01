@@ -20,7 +20,7 @@
           <%= link_to "ログアウト", destroy_admin_session_path %>
           <%= form_with(url: admin_items_path, method: :get, local: true) do |f| %>
             <i class="fas fa-search"></i>
-            <%= f.text_field :search, "検索" %>
+            <%= f.text_field :search %>
             <%= f.submit "search" %>
           <% end %>
         <% elsif end_user_signed_in? %>
