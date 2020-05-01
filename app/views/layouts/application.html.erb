@@ -18,6 +18,11 @@
           <%= link_to "受注一覧", admin_orders_path %>
           <%= link_to "商品登録", new_admin_item_path %>
           <%= link_to "ログアウト", destroy_admin_session_path %>
+          <%= form_with(url: admin_items_path, method: :get, local: true) do |f| %>
+            <i class="fas fa-search"></i>
+            <%= f.text_field :search, "検索" %>
+            <%= f.submit "search" %>
+          <% end %>
         <% elsif end_user_signed_in? %>
           <%= link_to "マイページ", public_end_user_path %>
           <%= link_to "カート一覧", public_end_user_cart_items_path %>
